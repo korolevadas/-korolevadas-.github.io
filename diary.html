@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ежедневник</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        input[type="date"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+        
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ежедневник</h1>
+    
+    <!-- Форма для добавления задач -->
+    <form id="task-form">
+        <label for="date">Дата:</label>
+        <input type="date" id="date" required>
+        
+        <label for="task">Задача:</label>
+        <input type="text" id="task" placeholder="Введите задачу..." required>
+        
+        <button type="submit">Добавить задачу</button>
+    </form>
+    
+    <!-- Список задач -->
+    <ul id="task-list"></ul>
+    
+    <script>
+        // Получаем элементы DOM
+        const taskForm = document.getElementById('task-form');
+        const taskList = document.getElementById('task-list');
+        
+        // Обработчик события отправки формы
+        taskForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Отменяем стандартное поведение формы
+
+            // Получаем значения полей формы
+            const date = document.getElementById('date').value;
+            const task = document.getElementById('task').value;
+
+            // Проверяем, заполнены ли поля
+            if (date && task) {
+                // Создаем новый элемент списка
+                const newTask = document.createElement('li');
+                newTask.innerHTML = `<strong>${date}</strong>: ${task}`;
+
+                // Добавляем задачу в список
+                taskList.appendChild(newTask);
+
+                // Очищаем форму
+                document.getElementById('date').value = '';
+                document.getElementById('task').value = '';
+            }
+        });
+    </script>
+	
+</body>
+</html>
